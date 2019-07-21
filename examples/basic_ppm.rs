@@ -3,6 +3,8 @@ use std::fs::File;
 use std::io::Write;
 use std::iter;
 use std::path::Path;
+extern crate raytracer;
+use raytracer::vec3::Vec3;
 
 fn main() {
     match try_main() {
@@ -27,14 +29,12 @@ fn try_main() -> Result<(), Box<std::error::Error>> {
         .chain(iter::once("255".into()))
         .chain((0..rows).flat_map(|row| {
             (0..cols).map(move |col| {
-                let r = row as f64 / rows as f64;
-                let g = col as f64 / cols as f64;
-                let b = 0.2;
+                let vec = Vec3::new(row as f64 / rows as f64, col as f64 / cols as f64, 0.2);
                 format!(
                     "{} {} {}",
-                    (r * 255.99) as u64,
-                    (g * 255.99) as u64,
-                    (b * 255.99) as u64
+                    (vec.x() * 255.9) as usize,
+                    (vec.y() * 255.9) as usize,
+                    (vec.z() * 255.9) as usize
                 )
             })
         }))
