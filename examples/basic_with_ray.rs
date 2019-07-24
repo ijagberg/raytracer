@@ -12,7 +12,7 @@ fn color(ray: &Ray) -> Vec3 {
 fn main() {
     let rows = 100_u64;
     let cols = 200_u64;
-    
+
     let lower_left_corner = Vec3::new(-2.0, -1.0, -1.0);
     let horizontal = Vec3::new(4.0, 0.0, 0.0);
     let vertical = Vec3::new(0.0, 2.0, 0.0);
@@ -25,7 +25,7 @@ fn main() {
             (0..cols).map(move |col| {
                 let u = col as f64 / cols as f64;
                 let v = row as f64 / rows as f64;
-                let r = Ray::new(origin, lower_left_corner + u * horizontal + v*vertical);
+                let r = Ray::new(origin, lower_left_corner + u * horizontal + v * vertical);
                 let color = color(&r);
                 format!(
                     "{} {} {}",
