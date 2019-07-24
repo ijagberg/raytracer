@@ -1,5 +1,6 @@
 use std::ops::{Add, Index, Mul};
 
+#[derive(Default, Copy, Clone)]
 pub struct Vec3 {
     content: [f64; 3],
 }
@@ -7,6 +8,11 @@ pub struct Vec3 {
 impl Vec3 {
     pub fn new(x: f64, y: f64, z: f64) -> Self {
         Self { content: [x, y, z] }
+    }
+
+    pub fn unit(vec: &Self) -> Self {
+        let scalar = 1.0 / vec.len();
+        Vec3::new(scalar * vec.x(), scalar * vec.y(), scalar * vec.z())
     }
 
     pub fn x(&self) -> f64 {
@@ -23,6 +29,11 @@ impl Vec3 {
 
     pub fn len(&self) -> f64 {
         (self.x() * self.x() + self.y() * self.y() + self.z() * self.z()).sqrt()
+    }
+
+    pub fn into_unit(self) -> Self {
+        let scalar = 1.0 / self.len();
+        self * scalar
     }
 }
 
