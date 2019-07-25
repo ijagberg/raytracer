@@ -27,6 +27,14 @@ impl Vec3 {
         self.content[2]
     }
 
+    pub fn cross(&self, other: &Self) -> Self {
+        Vec3::new(
+            self.y() * other.z() - self.z() * other.y(),
+            -(self.x() * other.z() - self.z() * other.x()),
+            self.x() * other.y() - self.y() * other.x(),
+        )
+    }
+
     pub fn len(&self) -> f64 {
         (self.x() * self.x() + self.y() * self.y() + self.z() * self.z()).sqrt()
     }
@@ -61,6 +69,14 @@ impl Sub for Vec3 {
     }
 }
 
+impl Mul<Vec3> for Vec3 {
+    type Output = f64;
+
+    fn mul(self, rhs: Vec3) -> Self::Output {
+        self.x() * rhs.x() + self.y() * rhs.y() + self.z() * rhs.z()
+    }
+}
+
 impl Mul<f64> for Vec3 {
     type Output = Vec3;
 
@@ -81,7 +97,7 @@ impl Mul<Vec3> for i64 {
     type Output = Vec3;
 
     fn mul(self, rhs: Vec3) -> Self::Output {
-        rhs * self    
+        rhs * self
     }
 }
 
