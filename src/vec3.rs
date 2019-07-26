@@ -69,6 +69,14 @@ impl Sub for Vec3 {
     }
 }
 
+impl Mul<Vec3> for &Vec3 {
+    type Output = f64;
+
+    fn mul(self, rhs: Vec3) -> Self::Output {
+        *self * rhs       
+    }
+}
+
 impl Mul<Vec3> for Vec3 {
     type Output = f64;
 
